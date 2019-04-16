@@ -1,0 +1,228 @@
+<apex:page controller="JIRA_IssueCreateController" applyHtmlTag="true" applyBodyTag="true" docType="html-5.0">
+    <html> 
+        <head> 
+            <meta charset="utf-8" /> 
+            <meta http-equiv="x-ua-compatible" content="ie=edge" /> 
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <apex:slds /> 
+            
+        </head> 
+        <body class="container"> 
+            <div class="slds"> 
+                <apex:form > 
+                    <apex:outputPanel id="main" > 
+                        <div class="slds-is-relative">
+                            <c:SLDS_Spinner />
+                        </div>
+                        <apex:outputPanel rendered="{!scsResp}">
+                            <div class="demo-only" style="height: 4rem;">
+                                <div class="slds-notify_container slds-is-relative">
+                                    <div class="slds-notify slds-notify_toast slds-theme_success" role="status">
+                                        <span class="slds-assistive-text">success</span>
+                                        <span class="slds-icon_container slds-icon-utility-success slds-m-right_small slds-no-flex slds-align-top" title="Description of icon when needed">
+                                            
+                                        </span>
+                                        <div class="slds-notify__content">
+                                            <h2 class="slds-text-heading_small "> <apex:outputText escape="false" value="{!respMessage}"></apex:outputText></h2>
+                                        </div>
+                                        <div class="slds-notify__close">
+                                            <button class="slds-button slds-button_icon slds-button_icon-inverse" title="Close">
+                                                
+                                                <span class="slds-assistive-text">Close</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!errorResp}">
+                            <div class="demo-only" style="height: 4rem;">
+                                <div class="slds-notify_container slds-is-relative">
+                                    <div class="slds-notify slds-notify_toast slds-theme_error" role="status">
+                                        <span class="slds-assistive-text">error</span>
+                                        <span class="slds-icon_container slds-icon-utility-error slds-m-right_small slds-no-flex slds-align-top" title="Description of icon when needed">
+                                            
+                                        </span>
+                                        <div class="slds-notify__content">
+                                            <h2 class="slds-text-heading_small "> <apex:outputText escape="false" value="{!respMessage}"></apex:outputText>     </h2>
+                                        </div>
+                                        <div class="slds-notify__close">
+                                            <button class="slds-button slds-button_icon slds-button_icon-inverse" title="Close">
+                                                
+                                                <span class="slds-assistive-text">Close</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </apex:outputPanel>
+                        <apex:outputPanel >
+                            
+                            
+                            <div class="demo-only slds-grid" style=" background: rgb(244, 246, 249); padding: 1rem;"> 
+                                <div class="slds-panel slds-grid slds-grid_vertical slds-nowrap"> 
+                                    <div class="slds-form slds-form_stacked slds-grow slds-scrollable_y">
+                                        
+                                        <div class="slds-panel__section slds-border_bottom"> 	
+                                            <div class="slds-media"> 	 
+                                                <div class="slds-media__figure"> 	 
+                                                    <h3 class="slds-text-heading_small slds-m-bottom_medium">Please select an available project and issue type</h3> 
+                                                </div> 	 
+                                                <div class="slds-media__body"> 
+                                                    
+                                                    
+                                                    <div class="slds-button-group slds-m-top_small" role="group" style="position:relative; float:right;"> 		  
+                                                        <apex:commandButton value="Cancel" reRender="main" styleClass="slds-button slds-button_neutral" action="{!cancel}"/> 
+                                                        <apex:commandButton value="Create Issue" reRender="main" styleClass="slds-button slds-button_brand" action="{!saveIssue}" status="renderLightningSpinner"/> 
+                                                        
+                                                    </div> 	  
+                                                </div> 	
+                                            </div>   
+                                        </div> 
+                                        
+                                        <div class="slds-panel__section"> 	
+                                            
+                                            
+                                            <ul> 	  
+                                                <li class="slds-form-element slds-hint-parent "> 
+                                                    <div class="slds-form-element"> 
+                                                        <label class="slds-form-element__label" for="field1"> 
+                                                            <abbr class="slds-required" title="required">*</abbr>Projects</label>
+                                                        <div class="slds-form-element__control"> 
+                                                            <div class="slds-select_container"> 
+                                                                
+                                                                
+                                                                <apex:selectList value="{!field1}" multiselect="false" size="1" styleClass="slds-select" required="true" id="field1"> 		
+                                                                    <apex:actionSupport event="onchange" action="{!getSecondaryPickVals}" reRender="field2" status="renderLightningSpinner"/> 
+                                                                    <apex:selectOptions value="{!selectList}" /> 	
+                                                                </apex:selectList> 
+                                                            </div> 
+                                                        </div> 
+                                                    </div> 	  
+                                                </li> 	
+                                                
+                                                <li class="slds-form-element slds-hint-parent "> 
+                                                    <div class="slds-form-element"> 
+                                                        <label class="slds-form-element__label" for="field2"> 
+                                                            <abbr class="slds-required" title="required">*</abbr> Issue Types</label> 
+                                                        <div class="slds-form-element__control"> 
+                                                            <div class="slds-select_container">    
+                                                                <apex:selectList id="field2" value="{!field2}" multiselect="false" size="1" styleClass="slds-select"> 
+                                                                    <apex:actionSupport event="onchange" action="{!initCteateForm}" reRender="main" status="renderLightningSpinner"/> 
+                                                                    <apex:selectOptions value="{!secondarySelectList}" /> 	
+                                                                </apex:selectList> 
+                                                            </div> 
+                                                        </div> 
+                                                    </div> 	  
+                                                </li>
+                                                
+                                                <li class="slds-form-element slds-hint-parent "> 
+                                                    <div class="slds-form-element"> 
+                                                        <apex:outputPanel id="issueCreateForm" rendered="{!issueCreateForm}" >
+                                                            <div class="slds-grid slds-wrap slds-grid_pull-padded-small">
+                                                                <apex:repeat value="{!issueCreateFieldForm}" var="jf">
+                                                                    <div class="slds-col slds-size_1-of-2">
+                                                                        <apex:outputPanel rendered="{!IF(jf.schema.fSystem=='summary',True,False)}">
+                                                                            <div class="slds-form-element">
+                                                                                <label class="slds-form-element__label" for="textarea-id-01">{!jf.name}</label>
+                                                                                <div class="slds-form-element__control">
+                                                                                    <apex:input value="{!jf.value}" type="text" styleClass="slds-input" required="{!jf.required}"/>
+                                                                                    
+                                                                                </div>
+                                                                            </div>
+                                                                        </apex:outputPanel>
+                                                                        <apex:outputPanel rendered="{!IF(jf.schema.fSystem=='description',True,False)}">
+                                                                            <div class="slds-form-element">
+                                                                                <label class="slds-form-element__label" for="textarea-id-01">{!jf.name}</label>
+                                                                                <div class="slds-form-element__control">
+                                                                                    <apex:inputTextarea value="{!jf.value}" styleClass="slds-textarea" required="{!jf.required}"/>
+                                                                                    
+                                                                                </div>
+                                                                            </div>
+                                                                        </apex:outputPanel>
+                                                                        <apex:outputPanel rendered="{!IF(jf.schema.fSystem=='priority',True,False)}">
+                                                                            <div class="slds-form-element">
+                                                                                <label class="slds-form-element__label" for="textarea-id-01">{!jf.name}</label>
+                                                                                <div class="slds-form-element__control">
+                                                                                    
+                                                                                    <apex:selectList value="{!jf.value}" multiselect="false" size="1" styleClass="slds-select" required="{!jf.required}">  
+                                                                                        
+                                                                                        <apex:selectOptions value="{!jf.items}"></apex:selectOptions>
+                                                                                        
+                                                                                    </apex:selectList>
+                                                                                    
+                                                                                </div>
+                                                                            </div>
+                                                                        </apex:outputPanel>
+                                                                        
+                                                                        <apex:outputPanel rendered="{!IF(jf.schema.fSystem=='duedate',True,False)}">
+                                                                            <div class="slds-form-element">
+                                                                                <label class="slds-form-element__label" for="textarea-id-01">{!jf.name}</label>
+                                                                                <div class="slds-form-element__control">
+                                                                                    <apex:input value="{!jf.value}" type="date" styleClass="slds-input" required="{!jf.required}"/>
+                                                                                    
+                                                                                </div>
+                                                                            </div>
+                                                                        </apex:outputPanel>
+                                                                        <apex:outputPanel rendered="{!IF(jf.schema.fSystem=='labels',True,False)}">
+                                                                            <div class="slds-form-element">
+                                                                                <label class="slds-form-element__label" for="textarea-id-01">{!jf.name} (comma separated)</label>
+                                                                                <div class="slds-form-element__control">
+                                                                                    <apex:input value="{!jf.value}" type="text" styleClass="slds-input" required="{!jf.required}"/>
+                                                                                    
+                                                                                </div>
+                                                                            </div>
+                                                                        </apex:outputPanel>  
+                                                                        <apex:outputPanel rendered="{!IF(OR(jf.schema.fSystem=='components'),True,False)}">
+                                                                            
+                                                                            <div class="slds-form-element"> 
+                                                                                <label class="slds-form-element__label" for="field2"> {!jf.name}</label> 
+                                                                                <div class="slds-form-element__control"> 
+                                                                                    <div class="slds-select_container">    
+                                                                                        <apex:selectList value="{!jf.value}" multiselect="false" size="1" styleClass="slds-select"> 
+                                                                                            <apex:selectOptions value="{!jf.items}"></apex:selectOptions>
+                                                                                            
+                                                                                        </apex:selectList> 
+                                                                                    </div> 
+                                                                                </div> 
+                                                                            </div> 
+                                                                        </apex:outputPanel>
+                                                                        <apex:outputPanel rendered="{!IF(OR(jf.schema.fSystem=='fixVersions'),True,False)}">
+                                                                            
+                                                                            <div class="slds-form-element"> 
+                                                                                <label class="slds-form-element__label" for="field2"> {!jf.name}</label> 
+                                                                                <div class="slds-form-element__control"> 
+                                                                                    <div class="slds-select_container">    
+                                                                                        <apex:selectList value="{!jf.value}"  size="1" styleClass="slds-select"> 
+                                                                                            <apex:selectOptions value="{!jf.items}"></apex:selectOptions>
+                                                                                            
+                                                                                        </apex:selectList> 
+                                                                                    </div> 
+                                                                                </div> 
+                                                                            </div> 
+                                                                        </apex:outputPanel>
+                                                                    </div>  
+                                                                </apex:repeat>
+                                                            </div>
+                                                            
+                                                        </apex:outputPanel>
+                                                        
+                                                    </div>
+                                                </li>
+                                                
+                                            </ul>
+                                            
+                                            
+                                        </div> 
+                                    </div> 
+                                </div> 
+                            </div> 		
+                            
+                        </apex:outputPanel> 
+                        
+                    </apex:outputPanel>
+                </apex:form>
+            </div>
+        </body>
+    </html>
+</apex:page>

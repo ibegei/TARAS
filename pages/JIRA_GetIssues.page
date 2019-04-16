@@ -1,0 +1,94 @@
+<apex:page standardController="Flosum__Branch__c" extensions="JIRA_FetchIssues">
+   <html >
+        <head>
+            <meta charset="utf-8" />
+            <meta http-equiv="x-ua-compatible" content="ie=edge" />
+            
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            
+            <apex:slds />
+            
+            
+            
+        </head>
+        <body>
+            
+            <div class="slds-scope">
+                <c:SLDS_Spinner />
+                <apex:form >
+                    
+                    <apex:outputPanel id="main">
+                        <apex:pageMessages ></apex:pageMessages>
+
+                                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">Issue Key</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Opportunity Name">Priority</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">Status</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">Assignee</div>
+                                            </th>
+                                            
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">Summary</div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                      <apex:repeat value="{!issues.issues}" var="issue">
+                                            <tr class="slds-hint-parent">
+                                                <td >
+                                                    <div class="slds-truncate" >
+                                                  
+                                                        
+                                                        <a href="https://grushaisf-dev.atlassian.net/browse/{!issue.key}" target="_blank"> {!issue.key}</a>
+                                                     
+           
+                                                        
+                                                    </div>
+                                                </td> 
+                                                <th  scope="row">
+                                                    <div class="slds-truncate" >
+                                                    {!issue.fields.priority.name}     
+                                                    </div>
+                                                </th>
+                                                <td >
+                                                    <div class="slds-truncate" >
+                                                    {!issue.fields.status.name   }   
+                                                    </div>
+                                                </td>
+                                                <td >
+                                                    <div class="slds-truncate" >
+                                                 {!issue.fields.assignee.displayName}   
+                                                    </div>
+                                                </td>
+                                                
+                                                <td >
+                                                    <div class="slds-truncate" >
+                                                     {!issue.fields.summary}
+                                                    </div>
+                                                </td>
+                                            </tr> 
+                                      
+
+                                       </apex:repeat>
+                                        
+                                        
+                                    </tbody>
+                                </table> 
+                                          
+               
+                    </apex:outputPanel>
+                </apex:form>
+            </div>
+            
+        </body>
+    </html> 
+</apex:page>

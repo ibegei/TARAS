@@ -1,0 +1,106 @@
+<apex:page controller="TFS_WorkItemController" standardStylesheets="false" sidebar="true" applyHtmlTag="true" applyBodyTag="false" docType="html-5.0" showHeader="true" tabStyle="Flosum__Branch__c">
+    
+    <html >
+        <head>
+            <meta charset="utf-8" />
+            <meta http-equiv="x-ua-compatible" content="ie=edge" />
+            
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            
+            <apex:slds />
+            
+            
+            
+        </head>
+        <body>
+
+            <div class="slds-scope">
+                <c:SLDS_Spinner />
+                <apex:form >
+                               
+                    <apex:outputPanel id="main">
+                         <apex:pageMessages ></apex:pageMessages>
+                        <article class="slds-card">
+                            <div class="slds-card__header slds-grid">
+                                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                    
+                                    <div class="slds-media__body">
+                                        <h2 class="slds-card__header-title">
+                                            
+                                            <span>Work Item</span>
+                                            
+                                        </h2>
+                                    </div>
+                                    <div class="slds-no-flex">
+                                        <apex:commandButton action="{!saveWI}" styleClass="slds-button slds-button_neutral" title="Save" value="Save" reRender="main" status="renderLightningSpinner"/>
+                                        
+                                    </div>
+                                </header>
+                            </div>
+                            <div class="slds-card__body slds-card__body_inner">Complete form and save work item</div>
+                            <ul> 	
+                                
+                                                                <li class="slds-form-element slds-hint-parent "> 
+                                    <div class="slds-form-element"> 
+                                        <label class="slds-form-element__label" for="field0"> 
+                                            Project</label>
+                                        <div class="slds-form-element__control"> 
+                                            <div class="slds-select_container"> 
+                                                <apex:selectList value="{!wItem.project}" multiselect="false" size="1" styleClass="slds-select" required="true" id="field0"> 		
+                                                    <apex:selectOptions value="{!projectList}" /> 	
+                                                </apex:selectList>
+                                                
+                                            </div> 
+                                        </div> 
+                                    </div> 	  
+                                </li> 	
+                                
+                                
+                                <li class="slds-form-element slds-hint-parent "> 
+                                    <div class="slds-form-element"> 
+                                        <label class="slds-form-element__label" for="field1"> 
+                                            Type</label>
+                                        <div class="slds-form-element__control"> 
+                                            <div class="slds-select_container"> 
+                                                <apex:selectList value="{!wItem.name}" multiselect="false" size="1" styleClass="slds-select" required="true" id="field1"> 		
+                                                    <apex:selectOptions value="{!selectList}" /> 	
+                                                </apex:selectList>
+                                                
+                                            </div> 
+                                        </div> 
+                                    </div> 	  
+                                </li> 	
+                                
+                                <li class="slds-form-element slds-hint-parent "> 
+                                    <div class="slds-form-element"> 
+                                        <label class="slds-form-element__label" for="field2"> 
+                                            Title</label> 
+                                        <div class="slds-form-element__control"> 
+                                            
+                                            <apex:input value="{!wItem.title}" styleClass="slds-input" required="true"></apex:input>
+                                            
+                                        </div> 
+                                    </div> 	  
+                                </li>
+                                <li class="slds-form-element slds-hint-parent ">
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label" > 
+                                            Description
+                                        </label> 
+                                        <div class="slds-form-element__control"> 	
+                                            <apex:input value="{!wItem.description}" styleClass="slds-input" required="true"></apex:input>
+                                            
+                                        </div> 
+                                    </div> 
+                                </li>
+                            </ul>
+                            
+                        </article>
+                    </apex:outputPanel>
+                </apex:form>
+            </div>
+            
+        </body>
+    </html>
+    
+</apex:page>

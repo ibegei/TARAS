@@ -1,0 +1,12 @@
+<apex:component >
+    <apex:actionStatus id="renderLightningSpinner" rendered="true" >
+    	<apex:facet name="start">
+			<div class="slds-spinner_container slds-show">
+	            <div class="slds-spinner--brand slds-spinner slds-spinner--large slds-is-fixed" aria-hidden="false" role="alert">
+	                <div class="slds-spinner__dot-a"></div>
+	                <div class="slds-spinner__dot-b"></div>
+	            </div>
+	        </div>
+        </apex:facet>
+    </apex:actionStatus>
+</apex:component>
