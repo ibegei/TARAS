@@ -1,0 +1,94 @@
+<apex:page standardController="Flosum__Branch__c" extensions="fetchWorkItemsController">
+   <html >
+        <head>
+            <meta charset="utf-8" />
+            <meta http-equiv="x-ua-compatible" content="ie=edge" />
+            
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            
+            <apex:slds />
+            
+            
+            
+        </head>
+        <body>
+            
+            <div class="slds-scope">
+                <c:SLDS_Spinner />
+                <apex:form >
+                    
+                    <apex:outputPanel id="main">
+                        <apex:pageMessages ></apex:pageMessages>
+
+                                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">Work Item Title</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Opportunity Name">Work Item Type</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">Work Item State</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">Work Item Reason</div>
+                                            </th>
+                                            
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Account Name">Work Item Priority</div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                      <apex:repeat value="{!workItems.value}" var="order">
+                                            <tr class="slds-hint-parent">
+                                                <td >
+                                                    <div class="slds-truncate" >
+                                                  
+                                                        
+                                                        <a href="{!order.x_links.html.href}" target="_blank"> {!order.fields.System_Title}</a>
+                                                     
+           
+                                                        
+                                                    </div>
+                                                </td> 
+                                                <th  scope="row">
+                                                    <div class="slds-truncate" >
+                                                     {!order.fields.System_WorkItemType}
+                                                    </div>
+                                                </th>
+                                                <td >
+                                                    <div class="slds-truncate" >
+                                                      {!order.fields.System_State}
+                                                    </div>
+                                                </td>
+                                                <td >
+                                                    <div class="slds-truncate" >
+                                                      {!order.fields.System_Reason}
+                                                    </div>
+                                                </td>
+                                                
+                                                <td >
+                                                    <div class="slds-truncate" >
+                                                       {!order.fields.Microsoft_VSTS_Common_Priority}
+                                                    </div>
+                                                </td>
+                                            </tr> 
+                                        </apex:repeat>
+
+                                       
+                                        
+                                        
+                                    </tbody>
+                                </table> 
+                                          
+               
+                    </apex:outputPanel>
+                </apex:form>
+            </div>
+            
+        </body>
+    </html> 
+</apex:page>
