@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fields>
-        <fullName>Flosum__Filter__c</fullName>
-        <deprecated>false</deprecated>
-        <externalId>false</externalId>
-        <label>Filter</label>
-        <length>131072</length>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>LongTextArea</type>
-        <visibleLines>3</visibleLines>
-    </fields>
+    <webLinks>
+        <fullName>Flosum__Deploy</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Add to Deployment</masterLabel>
+        <openType>sidebar</openType>
+        <page>Flosum__SnapshotToPatches</page>
+        <protected>false</protected>
+    </webLinks>
 </CustomObject>

@@ -1,28 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fields>
-        <fullName>Flosum__Deployment_Mode__c</fullName>
-        <deprecated>false</deprecated>
-        <externalId>false</externalId>
-        <label>CI Mode</label>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>VALIDATE</fullName>
-                    <default>false</default>
-                    <label>VALIDATE</label>
-                </value>
-                <value>
-                    <fullName>DEPLOY</fullName>
-                    <default>false</default>
-                    <label>DEPLOY</label>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
-    </fields>
+    <listViews>
+        <fullName>Flosum__All</fullName>
+        <columns>NAME</columns>
+        <columns>Flosum__Branch_Name__c</columns>
+        <columns>Flosum__Branch_Description__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>Flosum__Repository__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
 </CustomObject>
